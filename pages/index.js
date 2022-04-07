@@ -23,6 +23,26 @@ export default function Home() {
     { letter: "R", result: "none" },
   ]);
 
+  const handleReset = () => {
+    setGuessNum(1);
+    setCurrentAnswer([
+      { answer: "", wrongs: [] },
+      { answer: "", wrongs: [] },
+      { answer: "", wrongs: [] },
+      { answer: "", wrongs: [] },
+      { answer: "", wrongs: [] },
+    ]);
+    setIncludedLetters([]);
+    setGuesses([]);
+    setCurrentGuess([
+      { letter: "L", result: "none" },
+      { letter: "A", result: "none" },
+      { letter: "T", result: "none" },
+      { letter: "E", result: "none" },
+      { letter: "R", result: "none" },
+    ]);
+  };
+
   const handleLetterClick = (index, newResult) => {
     setCurrentGuess((prev) => [
       ...prev.slice(0, index),
@@ -105,7 +125,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.box}>
-        <h1>Wordle Solver</h1>
+        <div className={styles.text}>
+          <h1>Wordle Solver</h1>
+        </div>
         {guesses.length > 0 &&
           guesses.map((guess, i) => (
             <Row
@@ -115,8 +137,15 @@ export default function Home() {
             />
           ))}
         <Row word={currentGuess} handleLetterClick={handleLetterClick} active />
-        <button type="button" onClick={handleSubmit}>
+        <button className={styles.btn} type="button" onClick={handleSubmit}>
           Submit
+        </button>
+        <button
+          className={`${styles.btn} ${styles.reset}`}
+          type="button"
+          onClick={handleReset}
+        >
+          Reset
         </button>
       </div>
     </div>
