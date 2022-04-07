@@ -91,9 +91,7 @@ export default function Home() {
   useEffect(() => {
     const makeGuess = async (currentAnswer, includedLetters) => {
       const res = await axios.post(
-        process.env.MODE === "development"
-          ? "http://localhost:3000/api/guess"
-          : "https://misqke-wordle-solver.netlify.app/api/guess",
+        "https://misqke-wordle-solver.netlify.app/api/guess",
         {
           currentAnswer,
           includedLetters,

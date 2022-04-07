@@ -4,17 +4,4 @@
   justify-content: center;
   gap: 5px;
   position: relative;
-  animation-name: fade-in;
-  animation-duration: 1s;
-}
-
-@keyframes fade-in {
-  0% {
-    bottom: -2rem;
-    opacity: 0;
-  }
-  100% {
-    bottom: 0;
-    opacity: 1;
-  }
 }

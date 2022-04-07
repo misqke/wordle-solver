@@ -20,7 +20,7 @@ const LetterBox = ({ letter, handleLetterClick, index, active }) => {
           : letter.result === "correct"
           ? styles.correct
           : styles.container
-      } ${active === false && styles.inactive}`}
+      } ${active ? styles.active : styles.inactive}`}
       onClick={active === true ? handleClick : undefined}
     >
       {letter.letter}
