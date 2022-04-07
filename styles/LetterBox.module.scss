@@ -8,6 +8,7 @@
   font-weight: 600;
   color: #fff;
   background-color: #555;
+  cursor: pointer;
 }
 
 .correct {
@@ -16,4 +17,8 @@
 
 .almost {
   background-color: #ee0;
+}
+
+.inactive {
+  cursor: unset;
 }
