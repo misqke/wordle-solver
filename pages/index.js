@@ -118,7 +118,7 @@ export default function Home() {
     if (guessNum > 1) {
       makeGuess(currentAnswer, includedLetters);
     }
-  }, [currentAnswer, includedLetters, guessNum]);
+  }, [currentAnswer, includedLetters, guessNum, currentGuess]);
 
   return (
     <div className={styles.container}>
@@ -176,7 +176,7 @@ export default function Home() {
               </li>
               <li>
                 Click the letters on the Wordle Solver to match the results from
-                your Wordle game and click "Submit".
+                your Wordle game and click &quot;Submit&quot;.
               </li>
               <li>Repeat with the new word provided by Wordle Solver.</li>
             </ol>
