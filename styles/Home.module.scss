@@ -15,12 +15,13 @@
   gap: 0.5rem;
   height: 100%;
   position: relative;
+  padding: 1rem;
 }
 
 .text {
   margin: 1rem;
   h1 {
-    background: linear-gradient(90deg, #069, #096);
+    background: linear-gradient(90deg, #07c, #0c7);
     background-clip: text;
     color: transparent;
   }
@@ -32,13 +33,49 @@
   height: 40px;
   font-size: 20px;
   color: #fff;
-  background: linear-gradient(90deg, #069, #096);
+  background: linear-gradient(90deg, #07c, #0c7);
   cursor: pointer;
   border: none;
   border-radius: 8px;
+  transition-duration: 500ms;
+}
+
+.btn:hover {
+  box-shadow: 5px 0px 3px 5px #07ca, -5px 0px 3px 5px #0c7a;
 }
 
 .btn.reset {
   position: absolute;
   bottom: 20%;
+}
+
+.infoBtn {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  color: #fff;
+  cursor: pointer;
+  transition-duration: 250ms;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBtn:hover {
+  color: #099;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background: radial-gradient(#07c, #0c7);
+  color: #fff;
+  border-radius: 8px;
+  li {
+    margin-bottom: 8px;
+  }
 }

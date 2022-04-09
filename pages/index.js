@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Row from "../components/Row";
+import LoadingBar from "../components/LoadingBar";
 import axios from "axios";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
   const [guessNum, setGuessNum] = useState(1);
   const [currentAnswer, setCurrentAnswer] = useState([
     { answer: "", wrongs: [] },
@@ -52,6 +55,7 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     const usedLetters = [];
     currentGuess.forEach((letter, i) => {
       if (letter.result === "correct") {
@@ -109,6 +113,7 @@ export default function Home() {
       }
       setGuesses((prev) => [...prev, currentGuess]);
       setCurrentGuess(newGuess);
+      setLoading(false);
     };
     if (guessNum > 1) {
       makeGuess(currentAnswer, includedLetters);
@@ -135,6 +140,7 @@ export default function Home() {
             />
           ))}
         <Row word={currentGuess} handleLetterClick={handleLetterClick} active />
+        {loading === true && <LoadingBar />}
         <button className={styles.btn} type="button" onClick={handleSubmit}>
           Submit
         </button>
@@ -145,6 +151,37 @@ export default function Home() {
         >
           Reset
         </button>
+        <span
+          className={styles.infoBtn}
+          onClick={() => setShowInfo((prev) => !prev)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            className="bi bi-info-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+          </svg>
+        </span>
+        {showInfo === true && (
+          <div className={styles.info}>
+            <h3>How to use:</h3>
+            <ol>
+              <li>
+                Enter the word provided by Wordle Solver into your Wordle game.
+              </li>
+              <li>
+                Click the letters on the Wordle Solver to match the results from
+                your Wordle game and click "Submit".
+              </li>
+              <li>Repeat with the new word provided by Wordle Solver.</li>
+            </ol>
+          </div>
+        )}
       </div>
     </div>
   );
