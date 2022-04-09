@@ -90,7 +90,6 @@ export default function Home() {
       }
     });
     setGuessNum((prev) => prev + 1);
-    setGuesses((prev) => [...prev, currentGuess]);
   };
 
   useEffect(() => {
@@ -112,6 +111,7 @@ export default function Home() {
           }`,
         });
       }
+      setGuesses((prev) => [...prev, currentGuess]);
       setCurrentGuess(newGuess);
       setLoading(false);
     };
