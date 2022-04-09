@@ -90,6 +90,7 @@ export default function Home() {
       }
     });
     setGuessNum((prev) => prev + 1);
+    setGuesses((prev) => [...prev, currentGuess]);
   };
 
   useEffect(() => {
@@ -111,14 +112,13 @@ export default function Home() {
           }`,
         });
       }
-      setGuesses((prev) => [...prev, currentGuess]);
       setCurrentGuess(newGuess);
       setLoading(false);
     };
     if (guessNum > 1) {
       makeGuess(currentAnswer, includedLetters);
     }
-  }, [currentAnswer, includedLetters, guessNum, currentGuess]);
+  }, [currentAnswer, includedLetters, guessNum]);
 
   return (
     <div className={styles.container}>
