@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from "../styles/Home.module.scss";
 
 export default function Home() {
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [guessNum, setGuessNum] = useState(1);
@@ -44,6 +45,7 @@ export default function Home() {
       { letter: "E", result: "none" },
       { letter: "R", result: "none" },
     ]);
+    setError("");
   };
 
   const handleLetterClick = (index, newResult) => {
@@ -52,6 +54,7 @@ export default function Home() {
       { ...prev[index], result: newResult },
       ...prev.slice(index + 1),
     ]);
+    setError("");
   };
 
   const handleSubmit = async () => {
@@ -101,18 +104,24 @@ export default function Home() {
           includedLetters,
         }
       );
-      const newWord = res.data[0].word;
-      let newGuess = [];
-      for (let i = 0; i < newWord.length; i++) {
-        newGuess.push({
-          letter: newWord[i],
-          result: `${
-            currentAnswer[i].answer === newWord[i] ? "correct" : "none"
-          }`,
-        });
+      if (res.data.length > 0) {
+        const newWord = res.data[0].word;
+        let newGuess = [];
+        for (let i = 0; i < newWord.length; i++) {
+          newGuess.push({
+            letter: newWord[i],
+            result: `${
+              currentAnswer[i].answer === newWord[i] ? "correct" : "none"
+            }`,
+          });
+        }
+        setGuesses((prev) => [...prev, currentGuess]);
+        setCurrentGuess(newGuess);
+      } else {
+        setError(
+          "There does not seem to be any matching words. Check your input and try again."
+        );
       }
-      setGuesses((prev) => [...prev, currentGuess]);
-      setCurrentGuess(newGuess);
       setLoading(false);
     };
     if (guessNum > 1) {
@@ -141,6 +150,7 @@ export default function Home() {
           ))}
         <Row word={currentGuess} handleLetterClick={handleLetterClick} active />
         {loading === true && <LoadingBar />}
+        {error.length > 0 && <p className={styles.errorMsg}>{error}</p>}
         <button className={styles.btn} type="button" onClick={handleSubmit}>
           Submit
         </button>

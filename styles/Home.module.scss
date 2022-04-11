@@ -41,7 +41,7 @@
 }
 
 .btn:hover {
-  box-shadow: 5px 0px 3px 5px #07ca, -5px 0px 3px 5px #0c7a;
+  box-shadow: 3px 0px 3px 5px #07ca, -3px 0px 3px 5px #0c7a;
 }
 
 .btn.reset {
@@ -49,10 +49,18 @@
   bottom: 20%;
 }
 
+.errorMsg {
+  background: linear-gradient(90deg, #07c, #0c7);
+  background-clip: text;
+  color: transparent;
+  width: 80%;
+  text-align: center;
+}
+
 .infoBtn {
   position: absolute;
   top: 1rem;
-  right: 0;
+  right: 0.5rem;
   color: #fff;
   cursor: pointer;
   transition-duration: 250ms;
