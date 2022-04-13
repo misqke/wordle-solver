@@ -1,10 +1,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: #000;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .box {
@@ -27,9 +27,14 @@
   }
 }
 
+.btnBox {
+  display: flex;
+  gap: 1rem;
+}
+
 .btn {
   margin-top: 1rem;
-  width: 150px;
+  width: 125px;
   height: 40px;
   font-size: 20px;
   color: #fff;
@@ -42,11 +47,6 @@
 
 .btn:hover {
   box-shadow: 3px 0px 3px 5px #07ca, -3px 0px 3px 5px #0c7a;
-}
-
-.btn.reset {
-  position: absolute;
-  bottom: 20%;
 }
 
 .errorMsg {

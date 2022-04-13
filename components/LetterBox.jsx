@@ -14,6 +14,7 @@ const LetterBox = ({ letter, handleLetterClick, index, active }) => {
 
   return (
     <div
+      id={active === true ? `letterButton${index}` : undefined}
       className={`${styles.container} ${
         letter.result === "almost"
           ? styles.almost

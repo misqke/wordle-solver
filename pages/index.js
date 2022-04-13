@@ -20,11 +20,11 @@ export default function Home() {
   const [includedLetters, setIncludedLetters] = useState([]);
   const [guesses, setGuesses] = useState([]);
   const [currentGuess, setCurrentGuess] = useState([
+    { letter: "S", result: "none" },
     { letter: "L", result: "none" },
     { letter: "A", result: "none" },
     { letter: "T", result: "none" },
     { letter: "E", result: "none" },
-    { letter: "R", result: "none" },
   ]);
 
   const handleReset = () => {
@@ -39,11 +39,11 @@ export default function Home() {
     setIncludedLetters([]);
     setGuesses([]);
     setCurrentGuess([
+      { letter: "S", result: "none" },
       { letter: "L", result: "none" },
       { letter: "A", result: "none" },
       { letter: "T", result: "none" },
       { letter: "E", result: "none" },
-      { letter: "R", result: "none" },
     ]);
     setError("");
   };
@@ -97,13 +97,10 @@ export default function Home() {
 
   useEffect(() => {
     const makeGuess = async (currentAnswer, includedLetters) => {
-      const res = await axios.post(
-        "https://misqke-wordle-solver.netlify.app/api/guess",
-        {
-          currentAnswer,
-          includedLetters,
-        }
-      );
+      const res = await axios.post("http://localhost:3000/api/guess", {
+        currentAnswer,
+        includedLetters,
+      });
       if (res.data.length > 0) {
         const newWord = res.data[0].word;
         let newGuess = [];
@@ -151,16 +148,24 @@ export default function Home() {
         <Row word={currentGuess} handleLetterClick={handleLetterClick} active />
         {loading === true && <LoadingBar />}
         {error.length > 0 && <p className={styles.errorMsg}>{error}</p>}
-        <button className={styles.btn} type="button" onClick={handleSubmit}>
-          Submit
-        </button>
-        <button
-          className={`${styles.btn} ${styles.reset}`}
-          type="button"
-          onClick={handleReset}
-        >
-          Reset
-        </button>
+        <div className={styles.btnBox}>
+          <button
+            id="submitButton"
+            className={styles.btn}
+            type="button"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+          <button
+            id="resetButton"
+            className={`${styles.btn} ${styles.reset}`}
+            type="button"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+        </div>
         <span
           className={styles.infoBtn}
           onClick={() => setShowInfo((prev) => !prev)}
