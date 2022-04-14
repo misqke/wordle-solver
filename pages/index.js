@@ -97,10 +97,13 @@ export default function Home() {
 
   useEffect(() => {
     const makeGuess = async (currentAnswer, includedLetters) => {
-      const res = await axios.post("http://localhost:3000/api/guess", {
-        currentAnswer,
-        includedLetters,
-      });
+      const res = await axios.post(
+        "https://misqke-wordle-solver.netlify.app/api/guess",
+        {
+          currentAnswer,
+          includedLetters,
+        }
+      );
       if (res.data.length > 0) {
         const newWord = res.data[0].word;
         let newGuess = [];
